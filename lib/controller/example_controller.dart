@@ -5,7 +5,16 @@ class ExampleController extends ResourceController {
 
   @Operation.get()
   Future<Response> getExample() async {
-      return Response.ok(ExampleProvider().getData);
-    }
+    return Response.ok(ExampleProvider().getData);
+  }
+
+}
+
+class OtherExampleController extends ResourceController {
+
+  @Operation.get()
+  Future<Response> getOtherExample() async {
+    return Response.ok("THIS WORK");
+  }
 
 }
