@@ -1,11 +1,20 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:library/library.dart';
-import 'package:library/provider/example_provider.dart';
+import 'package:http/http.dart' as http;
 
 class ExampleController extends ResourceController {
 
+  final String _baseUrl = "firestore.googleapis.com";
+
   @Operation.get()
   Future<Response> getExample() async {
-    return Response.ok(ExampleProvider().getData);
+    final _url = Uri.https(_baseUrl, "/v1/projects/dart-server-example/databases/(default)/documents/i_dont_f_know");
+    final response = await http.get(_url);
+    final decodedData = jsonDecode(response.body);
+    return Response.ok(
+      decodedData
+    );
   }
 
 }
